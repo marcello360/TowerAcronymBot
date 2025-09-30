@@ -45,7 +45,7 @@ A Reddit bot that automatically detects and explains aviation/tower acronyms in 
 ### 3. Fork/Clone This Repository
 
 ```bash
-git clone https://github.com/yourusername/TowerAcronymBot.git
+git clone https://github.com/marcello360/TowerAcronymBot.git
 cd TowerAcronymBot
 ```
 
@@ -190,7 +190,7 @@ When the bot detects acronyms, it posts a reply like this:
 > - **IFR** - Instrument Flight Rules
 > 
 > ---
-> *I'm a bot that explains tower/aviation acronyms | [Source](https://github.com/yourusername/TowerAcronymBot)*
+> *I'm a bot that explains tower/aviation acronyms | [Source](https://github.com/marcello360/TowerAcronymBot)*
 
 ## Monitoring
 

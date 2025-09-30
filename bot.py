@@ -148,7 +148,7 @@ class TowerAcronymBot:
         # Add footer
         response += "\n---\n"
         response += "^(I'm a bot that explains tower/aviation acronyms | )"
-        response += "^[Source](https://github.com/yourusername/TowerAcronymBot)"
+        response += "^[Source](https://github.com/marcello360/TowerAcronymBot)"
         
         return response
     
