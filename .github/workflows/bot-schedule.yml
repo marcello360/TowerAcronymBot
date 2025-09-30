@@ -1,9 +1,9 @@
 name: TowerAcronymBot Scheduler
 
 on:
-  # Run every 15 minutes
+  # Run every 6 minutes
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/6 * * * *'
   
   # Allow manual trigger
   workflow_dispatch:
