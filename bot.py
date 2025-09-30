@@ -126,6 +126,7 @@ class TowerAcronymBot:
     def format_response(self, acronyms: List[str]) -> str:
         """
         Format the bot's response message with acronym explanations.
+        Progressive snark levels based on acronym count.
         
         Args:
             acronyms: List of acronym keys found in the comment
@@ -136,19 +137,39 @@ class TowerAcronymBot:
         if not acronyms:
             return ""
         
-        # Build response
-        if len(acronyms) == 1:
-            response = "Hi! I detected an acronym in your comment:\n\n"
-        else:
-            response = "Hi! I detected some acronyms in your comment:\n\n"
+        count = len(acronyms)
         
+        # Progressive snark based on acronym count
+        if count == 1:
+            response = "Hi! I spotted an acronym in your comment:\n\n"
+            footer = "^(I'm a bot that explains acronyms)"
+        elif count <= 2:
+            response = "Hi! I detected a couple acronyms in your comment:\n\n"
+            footer = "^(I'm a bot that explains acronyms)"
+        elif count <= 4:
+            response = "Alright, let's decode this:\n\n"
+            footer = "^(I'm a bot | Translating one comment at a time)"
+        elif count <= 6:
+            response = "Wow, someone's been drinking the acronym juice. Here's the translation:\n\n"
+            footer = "^(I'm a bot | Because full words are apparently too mainstream)"
+        elif count <= 8:
+            response = "Oh good, a comment that reads like military code. Let me decrypt this alphabet soup:\n\n"
+            footer = "^(I'm a bot | My purpose is suffering through your abbreviations)"
+        elif count <= 10:
+            response = "*Deep breath* Okay. OKAY. Let's unpack this cryptic mess you've created:\n\n"
+            footer = "^(I'm a bot | Someone please end my existence)"
+        else:
+            response = "ARE YOU KIDDING ME RIGHT NOW? Did you just have a stroke on your keyboard or are you genuinely trying to communicate? Fine. FINE. Here's your dissertation translated:\n\n"
+            footer = "^(I'm a bot | This is my villain origin story | You did this)"
+        
+        # Add acronym explanations
         for acronym in acronyms:
             explanation = self.acronyms[acronym]
             response += f"- **{acronym}** - {explanation}\n"
         
         # Add footer
         response += "\n---\n"
-        response += "^(I'm a bot that explains esoteric acronyms )"
+        response += footer
         
         return response
     
