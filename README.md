@@ -1,12 +1,13 @@
-# TowerAcronymBot 🛩️
+# TowerAcronymBot 🎮
 
-A Reddit bot that automatically detects and explains aviation/tower acronyms in comments. The bot monitors a specific subreddit and replies with helpful explanations when it finds recognized acronyms.
+A Reddit bot that automatically detects and explains game acronyms in comments with progressively snarky responses. The bot monitors your subreddit and helps new players decode the esoteric alphabet soup that veteran players casually throw around.
 
 ## Features
 
-✅ **Automatic Detection** - Scans subreddit comments for 100+ aviation acronyms  
-✅ **Smart Matching** - Uses word boundary detection to avoid partial matches  
+✅ **Automatic Detection** - Scans subreddit comments for 125+ game acronyms (mods, cards, labs, workshop stats, etc.)  
+✅ **Smart Matching** - Space-delimited detection to avoid false positives  
 ✅ **No Duplicates** - Tracks replied comments to prevent spam  
+✅ **Progressive Snark** - Gets increasingly snarky based on how many acronyms it finds (1-2 = helpful, 11+ = roasting)  
 ✅ **GitHub Actions** - Runs automatically every 15 minutes from GitHub  
 ✅ **Easy Configuration** - Simple JSON file for adding/removing acronyms  
 ✅ **Comprehensive Logging** - Full activity logs in GitHub Actions
@@ -14,10 +15,20 @@ A Reddit bot that automatically detects and explains aviation/tower acronyms in 
 ## How It Works
 
 1. Bot scans the last 100 comments in your target subreddit
-2. Checks each comment for known acronyms (e.g., ATC, VFR, IFR)
-3. If acronyms are found, replies with explanations
+2. Checks each comment for known acronyms (e.g., AS, BH, GT, MVN, DWEW)
+3. If acronyms are found, replies with explanations and attitude that scales with acronym count
 4. Saves comment IDs to prevent duplicate replies
 5. Repeats every 15 minutes via GitHub Actions
+
+## Snark Levels
+
+The bot adjusts its personality based on acronym density:
+- **1-2 acronyms**: "Hi! I spotted an acronym..." (Friendly)
+- **3-4 acronyms**: "Alright, let's decode this..." (Mildly snarky)
+- **5-6 acronyms**: "Wow, someone's been drinking the acronym juice..." (Getting snarky)
+- **7-8 acronyms**: "Oh good, a comment that reads like military code..." (Very snarky)
+- **9-10 acronyms**: "*Deep breath* Okay. OKAY..." (Maximum snark)
+- **11+ acronyms**: "ARE YOU KIDDING ME RIGHT NOW?..." (Nuclear snark)
 
 ## Setup Instructions
 
@@ -181,16 +192,45 @@ TowerAcronymBot/
 
 ## How Replies Look
 
-When the bot detects acronyms, it posts a reply like this:
-
-> Hi! I detected some acronyms in your comment:
+### Example 1: Friendly (2 acronyms)
+> Hi! I detected a couple acronyms in your comment:
 > 
-> - **ATC** - Air Traffic Control
-> - **VFR** - Visual Flight Rules
-> - **IFR** - Instrument Flight Rules
+> - **BH** - Black Hole ultimate weapon
+> - **GT** - Golden Tower ultimate weapon
 > 
 > ---
-> *I'm a bot that explains tower/aviation acronyms | [Source](https://github.com/marcello360/TowerAcronymBot)*
+> *I'm a bot that explains acronyms*
+
+### Example 2: Snarky (6 acronyms)
+> Wow, someone's been drinking the acronym juice. Here's the translation:
+> 
+> - **AS** - Amplifying Strike cannon mod
+> - **BHD** - Black Hole Digestor generator mod
+> - **MVN** - Multiverse Nexus core mod
+> - **DWEW** - Death Wave Effective Wave
+> - **GC** - Glass Cannon
+> - **PWR** - Perk Wave Requirement
+> 
+> ---
+> *I'm a bot | Because full words are apparently too mainstream*
+
+### Example 3: Nuclear Snark (11+ acronyms)
+> ARE YOU KIDDING ME RIGHT NOW? Did you just have a stroke on your keyboard or are you genuinely trying to communicate? Fine. FINE. Here's your dissertation translated:
+> 
+> - **AS** - Amplifying Strike cannon mod
+> - **ASPD** - Attack Speed workshop stat
+> - **BH** - Black Hole ultimate weapon
+> - **CF** - Chrono Field ultimate weapon
+> - **DW** - Death Wave ultimate weapon
+> - **GT** - Golden Tower ultimate weapon
+> - **MVN** - Multiverse Nexus core mod
+> - **eHP** - Effective Health Points
+> - **GC** - Glass Cannon
+> - **ROI** - Return on Investment
+> - **WAWSIS** - Wave Accelerator + Wave Skip + Intro Sprint
+> 
+> ---
+> *I'm a bot | This is my villain origin story | You did this*
 
 ## Monitoring
 
@@ -246,9 +286,10 @@ This shouldn't happen - the code explicitly checks for this. If it does:
 1. **Start Small**: Test on a private or low-traffic subreddit first
 2. **Monitor Frequently**: Check Actions logs after initial deployment
 3. **Respect Subreddit Rules**: Ensure the subreddit allows bots
-4. **Be Helpful**: Only add acronyms relevant to your target subreddit
+4. **Be Helpful**: Only add acronyms relevant to your game/community
 5. **Rate Limits**: Don't set the frequency too high (15 minutes is recommended)
-6. **Community Feedback**: Monitor comment replies and adjust if users complain
+6. **Community Feedback**: Monitor comment replies and adjust snark levels if needed
+7. **Acronym Quality**: Keep definitions accurate and up-to-date with game updates
 
 ## Reddit Bot Guidelines
 
@@ -272,8 +313,8 @@ This project is provided as-is for educational purposes. Use responsibly and in 
 
 ## Disclaimer
 
-This bot is not affiliated with Reddit or any aviation authority. Acronym explanations are provided for informational purposes only.
+This bot is not affiliated with Reddit or any game developer. Acronym explanations are provided for informational purposes only. The snark is purely for entertainment.
 
 ---
 
-**Happy flying! ✈️**
+**Happy gaming! 🎮**
