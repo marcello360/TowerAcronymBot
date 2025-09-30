@@ -7,18 +7,18 @@ A Reddit bot that automatically detects and explains game acronyms in comments w
 ✅ **Automatic Detection** - Scans subreddit comments for 125+ game acronyms (mods, cards, labs, workshop stats, etc.)  
 ✅ **Smart Matching** - Space-delimited detection to avoid false positives  
 ✅ **No Duplicates** - Tracks replied comments to prevent spam  
-✅ **Progressive Snark** - Gets increasingly snarky based on how many acronyms it finds (1-2 = helpful, 11+ = roasting)  
+✅ **Progressive Snark** - Gets increasingly snarky based on how many acronyms it finds (2 = helpful, 11+ = roasting)  
 ✅ **GitHub Actions** - Runs automatically every 15 minutes  
 ✅ **Easy Configuration** - Simple JSON file for adding/removing acronyms
 
 ## How It Works
 
-The bot scans recent comments in the subreddit, detects acronyms from its database, and replies with explanations. The tone scales with the number of acronyms found - from friendly and helpful to hilariously exasperated.
+The bot scans recent comments in the subreddit, detects acronyms from its database, and replies with explanations when it finds **at least 2 acronyms**. The tone scales with the number of acronyms found - from friendly and helpful to hilariously exasperated.
 
 ## Snark Levels
 
 The bot adjusts its personality based on acronym density:
-- **1-2 acronyms**: Friendly and helpful
+- **2 acronyms**: Friendly and helpful
 - **3-4 acronyms**: Mildly snarky
 - **5-6 acronyms**: Getting snarky
 - **7-8 acronyms**: Very snarky  

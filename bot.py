@@ -140,10 +140,7 @@ class TowerAcronymBot:
         count = len(acronyms)
         
         # Progressive snark based on acronym count
-        if count == 1:
-            response = "Hi! I spotted an acronym in your comment:\n\n"
-            footer = "^(I'm a bot that explains acronyms)"
-        elif count <= 2:
+        if count <= 2:
             response = "Hi! I detected a couple acronyms in your comment:\n\n"
             footer = "^(I'm a bot that explains acronyms)"
         elif count <= 4:
@@ -225,7 +222,8 @@ class TowerAcronymBot:
                 # Find acronyms in the comment
                 found_acronyms = self.find_acronyms(comment.body)
                 
-                if found_acronyms:
+                # Only reply if at least 2 acronyms are found
+                if found_acronyms and len(found_acronyms) >= 2:
                     logger.info(f"Found acronyms {found_acronyms} in comment {comment.id}")
                     
                     # Format and send reply
