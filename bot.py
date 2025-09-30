@@ -95,7 +95,7 @@ class TowerAcronymBot:
     def find_acronyms(self, text: str) -> List[str]:
         """
         Find all known acronyms in the given text.
-        Uses word boundary matching to avoid partial matches.
+        Only matches acronyms that are surrounded by spaces (or start/end of string).
         
         Args:
             text: The comment text to search
@@ -110,9 +110,10 @@ class TowerAcronymBot:
         text_upper = text.upper()
         
         for acronym in self.acronyms.keys():
-            # Create regex pattern with word boundaries
-            # \b ensures we match whole words only
-            pattern = r'\b' + re.escape(acronym.upper()) + r'\b'
+            # Create regex pattern requiring spaces (or string boundaries) around the acronym
+            # (?:^|\s) matches start of string or whitespace
+            # (?:\s|$) matches whitespace or end of string
+            pattern = r'(?:^|\s)' + re.escape(acronym.upper()) + r'(?:\s|$)'
             
             if re.search(pattern, text_upper):
                 # Preserve original case from acronyms.json
@@ -147,8 +148,7 @@ class TowerAcronymBot:
         
         # Add footer
         response += "\n---\n"
-        response += "^(I'm a bot that explains tower/aviation acronyms | )"
-        response += "^[Source](https://github.com/marcello360/TowerAcronymBot)"
+        response += "^(I'm a bot that explains esoteric acronyms )"
         
         return response
     
