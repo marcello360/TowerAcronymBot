@@ -131,13 +131,12 @@ class TowerAcronymBot:
                 if acronym not in seen:
                     found_acronyms.append(acronym)
                     seen.add(acronym)
-        
         return found_acronyms
     
     def find_question_acronym(self, text: str) -> tuple[str, str]:
         """
         Check if the text contains a question asking about an acronym.
-        Patterns: "what is X?" or "what does X mean?"
+        Supports many common question formats.
         
         Args:
             text: The comment text to search
@@ -148,20 +147,51 @@ class TowerAcronymBot:
         # Case-insensitive search for question patterns
         text_lower = text.lower()
         
-        # Pattern 1: "what is X?" or "what's X?"
-        pattern1 = r"what(?:'s| is)\s+(\w+)\s*\?"
-        # Pattern 2: "what does X mean?"
-        pattern2 = r"what(?:'s| does)\s\s+(\w+)\s+mean\s*\?"
-        
-        match = re.search(pattern1, text_lower) or re.search(pattern2, text_lower)
-        
-        if match:
-            potential_acronym = match.group(1).upper()
+        # List of regex patterns to match different question formats
+        patterns = [
+            # Direct questions: "what is X?", "what's X?"
+            r"what(?:'s| is)\s+(\w+)\s*\?",
             
-            # Check if it's in our acronyms database (case-insensitive)
-            for acronym, explanation in self.acronyms.items():
-                if acronym.upper() == potential_acronym:
-                    return (acronym, explanation)
+            # Mean questions: "what does X mean?", "what X means?"
+            r"what\s+does\s+(\w+)\s+mean\s*\?",
+            r"what\s+(\w+)\s+means?\s*\?",
+            
+            # Stand for: "what does X stand for?", "what's X stand for?", "what X stands for?"
+            r"what\s+(?:does\s+|'s\s+)?(\w+)\s+stands?\s+for\s*\?",
+            
+            # Short for: "what is X short for?", "what's X short for?", "what X is short for?"
+            r"what\s+(?:is\s+|'s\s+)?(\w+)\s+(?:is\s+)?short\s+for\s*\?",
+            
+            # Casual variations: "what the hell is X?", "wtf is X?", "what exactly is X?", "what even is X?"
+            r"what\s+(?:the\s+(?:hell|fuck)\s+)?(?:exactly\s+)?(?:even\s+)?is\s+(\w+)\s*\?",
+            r"wtf\s+is\s+(\w+)\s*\?",
+            
+            # Knowledge questions: "anyone know what X is?", "does anyone know what X means?"
+            r"(?:does\s+)?(?:any(?:one|body)\s+)?know\s+what\s+(\w+)\s+(?:is|means?)\s*\?",
+            r"(?:do\s+)?you\s+know\s+what\s+(\w+)\s+(?:is|means?)\s*\?",
+            
+            # Short forms: "X meaning?", "meaning of X?", "X definition?", "definition of X?"
+            r"(\w+)\s+meaning\s*\?",
+            r"meaning\s+of\s+(\w+)\s*\?",
+            r"(\w+)\s+definition\s*\?",
+            r"definition\s+of\s+(\w+)\s*\?",
+            r"define\s+(\w+)\s*\?",
+            
+            # Grammatically questionable but common: "what do X mean?", "what do X stand for?"
+            r"what\s+do\s+(\w+)\s+mean\s*\?",
+            r"what\s+do\s+(\w+)\s+stand\s+for\s*\?",
+        ]
+        
+        # Try each pattern
+        for pattern in patterns:
+            match = re.search(pattern, text_lower)
+            if match:
+                potential_acronym = match.group(1).upper()
+                
+                # Check if it's in our acronyms database (case-insensitive)
+                for acronym, explanation in self.acronyms.items():
+                    if acronym.upper() == potential_acronym:
+                        return (acronym, explanation)
         
         return (None, None)
     
@@ -185,16 +215,16 @@ class TowerAcronymBot:
         if count <= 4:
             response = "Hi! I detected a few acronyms in your comment:\n\n"
             footer = "^(I'm a bot that explains acronyms)"
-        elif count <= 6:
+        elif count <= 7:
             response = "Alright, let's decode this:\n\n"
             footer = "^(I'm a bot | Translating one comment at a time)"
-        elif count <= 10:
+        elif count <= 11:
             response = "Wow, someone loves their acronyms. Here's the translation:\n\n"
             footer = "^(I'm a bot | Because English is complicated enough already)"
-        elif count <= 15:
+        elif count <= 16:
             response = "Oh good, a comment that reads like military code. Let's decrypt this:\n\n"
             footer = "^(I'm a bot | My purpose is suffering through esoteric nonsense)"
-        elif count <= 20:
+        elif count <= 22:
             response = "*Deep breath* Okay. OKAY. Let's unpack this cryptic mess you've created:\n\n"
             footer = "^(I'm a bot | Someone please end my existence)"
         else:
