@@ -134,6 +134,37 @@ class TowerAcronymBot:
         
         return found_acronyms
     
+    def find_question_acronym(self, text: str) -> tuple[str, str]:
+        """
+        Check if the text contains a question asking about an acronym.
+        Patterns: "what is X?" or "what does X mean?"
+        
+        Args:
+            text: The comment text to search
+            
+        Returns:
+            Tuple of (acronym, explanation) if found, otherwise (None, None)
+        """
+        # Case-insensitive search for question patterns
+        text_lower = text.lower()
+        
+        # Pattern 1: "what is X?" or "what's X?"
+        pattern1 = r"what(?:'s| is)\s+(\w+)\s*\?"
+        # Pattern 2: "what does X mean?"
+        pattern2 = r"what(?:'s| does)\s\s+(\w+)\s+mean\s*\?"
+        
+        match = re.search(pattern1, text_lower) or re.search(pattern2, text_lower)
+        
+        if match:
+            potential_acronym = match.group(1).upper()
+            
+            # Check if it's in our acronyms database (case-insensitive)
+            for acronym, explanation in self.acronyms.items():
+                if acronym.upper() == potential_acronym:
+                    return (acronym, explanation)
+        
+        return (None, None)
+    
     def format_response(self, acronyms: List[str]) -> str:
         """
         Format the bot's response message with acronym explanations.
@@ -178,6 +209,24 @@ class TowerAcronymBot:
         # Add footer
         response += "\n---\n"
         response += footer
+        
+        return response
+    
+    def format_question_response(self, acronym: str, explanation: str) -> str:
+        """
+        Format a response for a direct question about an acronym.
+        
+        Args:
+            acronym: The acronym that was asked about
+            explanation: The explanation from the database
+            
+        Returns:
+            Formatted response string
+        """
+        response = f"**{acronym}** stands for **{explanation}**\n\n"
+        response += "*Beep boop* 🤖\n\n"
+        response += "---\n"
+        response += "^(I'm a bot that explains acronyms)"
         
         return response
     
@@ -230,10 +279,33 @@ class TowerAcronymBot:
                 if self.should_skip_comment(comment):
                     continue
                 
-                # Find acronyms in the comment
+                # First check if this is a direct question about an acronym
+                question_acronym, explanation = self.find_question_acronym(comment.body)
+                
+                if question_acronym:
+                    logger.info(f"Found question about {question_acronym} in comment {comment.id}")
+                    response = self.format_question_response(question_acronym, explanation)
+                    
+                    try:
+                        comment.reply(response)
+                        logger.info(f"Replied to question in comment {comment.id}")
+                        
+                        # Mark as replied
+                        self.replied_comments.add(comment.id)
+                        replies_sent += 1
+                        
+                        # Save state after each successful reply
+                        self.save_replied_comments()
+                        
+                    except Exception as e:
+                        logger.error(f"Failed to reply to comment {comment.id}: {e}")
+                    
+                    continue
+                
+                # Otherwise, find acronyms in the comment
                 found_acronyms = self.find_acronyms(comment.body)
                 
-                # Only reply if at least 2 acronyms are found
+                # Only reply if at least 3 acronyms are found
                 if found_acronyms and len(found_acronyms) >= 3:
                     logger.info(f"Found acronyms {found_acronyms} in comment {comment.id}")
                     
