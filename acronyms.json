@@ -18,10 +18,11 @@
   "BST": "Bounce Shot Target [Workshop Stat]",
   "BW": "Bounce Web - strategy that maximizes projectile counts to trigger Pulsar Harvester",
   "C%": "Critical Chance [Workshop Stat/Lab]",
-  "CB": "Coin Bot",
-  "CC": "Crowd Control (also Crit Coin [Card])",
+  "CB": "Coin Bot aka Golden Bot (also Coin/Kill Bonus [Workshop Stat/Lab])",
+  "CC": "Crowd Control (also Crit Coin [Card] or Crit Chance [Card])",
   "CD": "Cooldown",
   "CF": "Chrono Field [Ultimate Weapon] (also Crit Factor [Workshop Stat/Lab])",
+  "CFD": "Chrono Field Duration [Lab]",
   "CFR": "Chrono Field Damage Reduction [Lab]",
   "CL": "Chain Lightning [Ultimate Weapon]",
   "CPH": "Coins per Hour",
@@ -121,7 +122,7 @@
   "SS": "Shatter Shards [Lab]",
   "ST": "Super Tower [Card]",
   "Submod": "Sub-Modules - Values that can be altered within the mod specifically",
-  "SW": "Second Wind [Card]",
+  "SW": "Second Wind [Card] (also Shockwave)",
   "SWf": "Shockwave Frequency [Workshop Stat]",
   "SWs": "ShockWave Size [Workshop Stat]",
   "TB": "Thunder Bot",
@@ -135,6 +136,5 @@
   "WAWSIS": "Wave Accelerator + Wave Skip + Intro Sprint [Cards]",
   "WHR": "Wormhole Redirector [Core Mod]",
   "WR": "Wormhole Redirector [Core Mod]",
-  "WS": "Wave Skip [Card] (also Workshop)",
-  "Zerk": "Berserker [Card]"
+  "WS": "Wave Skip [Card] (also Workshop)"
 }

@@ -107,7 +107,7 @@ class TowerAcronymBot:
         seen = set()
         
         # Case-sensitive acronyms (only match if all caps)
-        case_sensitive = {'IS', 'AS'}
+        case_sensitive = {'IS', 'AS', 'TO'}
         
         # Convert text to uppercase for matching
         text_upper = text.upper()
