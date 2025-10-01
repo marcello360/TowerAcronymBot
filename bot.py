@@ -224,7 +224,6 @@ class TowerAcronymBot:
             Formatted response string
         """
         response = f"**{acronym}** stands for **{explanation}**\n\n"
-        response += "*Beep boop* 🤖\n\n"
         response += "---\n"
         response += "^(I'm a bot that explains acronyms)"
         
