@@ -112,8 +112,9 @@ class TowerAcronymBot:
         for acronym in self.acronyms.keys():
             # Create regex pattern requiring spaces (or string boundaries) around the acronym
             # (?:^|\s) matches start of string or whitespace
-            # (?:\s|$) matches whitespace or end of string
-            pattern = r'(?:^|\s)' + re.escape(acronym.upper()) + r'(?:\s|$)'
+            # (?:\s|[.,!?;:]|$) matches whitespace, common punctuation, or end of string
+            # Don't match if followed by + or % (for things like UW+, DEF%)
+            pattern = r'(?:^|\s)' + re.escape(acronym.upper()) + r'(?:\s|[.,!?;:]|$)'
             
             if re.search(pattern, text_upper):
                 # Preserve original case from acronyms.json
