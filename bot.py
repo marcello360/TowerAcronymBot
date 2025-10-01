@@ -157,17 +157,17 @@ class TowerAcronymBot:
         elif count <= 5:
             response = "Alright, let's decode this:\n\n"
             footer = "^(I'm a bot | Translating one comment at a time)"
-        elif count <= 7:
-            response = "Wow, someone loves their acronyms. Here's the translation:\n\n"
-            footer = "^(I'm a bot | Because full words are too complicated to type out)"
         elif count <= 9:
+            response = "Wow, someone loves their acronyms. Here's the translation:\n\n"
+            footer = "^(I'm a bot | Because English is complicated enough already)"
+        elif count <= 14:
             response = "Oh good, a comment that reads like military code. Let's decrypt this:\n\n"
             footer = "^(I'm a bot | My purpose is suffering through esoteric nonsense)"
-        elif count <= 11:
+        elif count <= 20:
             response = "*Deep breath* Okay. OKAY. Let's unpack this cryptic mess you've created:\n\n"
             footer = "^(I'm a bot | Someone please end my existence)"
         else:
-            response = "ARE YOU KIDDING ME RIGHT NOW? Did you just have a stroke on your keyboard or are you genuinely trying to communicate? Fine. FINE. Here's your dissertation translated:\n\n"
+            response = "ARE YOU KIDDING ME RIGHT NOW? Did you just have a stroke on your keyboard or are you genuinely trying to communicate? Here's your dissertation translated:\n\n"
             footer = "^(I'm a bot | This is my villain origin story | You did this)"
         
         # Add acronym explanations
