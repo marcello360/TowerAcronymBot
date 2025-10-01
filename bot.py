@@ -235,7 +235,7 @@ class TowerAcronymBot:
         for acronym in acronyms:
             explanation = self.acronyms[acronym]
             # Italicize text inside brackets
-            explanation = re.sub(r'\[([^\]]+)\]', r'*[\1]*', explanation)
+            explanation = re.sub(r'\[([^\]]+)\]', r'[*\1*]', explanation)
             response += f"- **{acronym}** - {explanation}\n"
         
         # Add footer
@@ -256,7 +256,7 @@ class TowerAcronymBot:
             Formatted response string
         """
         # Italicize text inside brackets
-        explanation = re.sub(r'\[([^\]]+)\]', r'*[\1]*', explanation)
+        explanation = re.sub(r'\[([^\]]+)\]', r'[*\1*]', explanation)
         response = f"**{acronym}** stands for **{explanation}**\n\n"
         response += "*Beep boop* 🤖\n\n"
         response += "---\n"
