@@ -106,6 +106,9 @@ class TowerAcronymBot:
         found_acronyms = []
         seen = set()
         
+        # Case-sensitive acronyms (only match if all caps)
+        case_sensitive = {'IS', 'AS'}
+        
         # Convert text to uppercase for matching
         text_upper = text.upper()
         
@@ -113,9 +116,17 @@ class TowerAcronymBot:
             # Create regex pattern requiring spaces (or string boundaries) around the acronym
             # (?:^|\s) matches start of string or whitespace
             # (?:\s|[.,!?;:)+]|$) matches whitespace, common punctuation, or end of string
-            pattern = r'(?:^|\s)' + re.escape(acronym.upper()) + r'(?:\s|[.,!?;:)+]|$)'
             
-            if re.search(pattern, text_upper):
+            if acronym.upper() in case_sensitive:
+                # Case-sensitive matching for IS and AS
+                pattern = r'(?:^|\s)' + re.escape(acronym) + r'(?:\s|[.,!?;:)+]|$)'
+                search_text = text
+            else:
+                # Case-insensitive matching for others
+                pattern = r'(?:^|\s)' + re.escape(acronym.upper()) + r'(?:\s|[.,!?;:)+]|$)'
+                search_text = text_upper
+            
+            if re.search(pattern, search_text):
                 # Preserve original case from acronyms.json
                 if acronym not in seen:
                     found_acronyms.append(acronym)

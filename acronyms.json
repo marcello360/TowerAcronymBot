@@ -1,6 +1,7 @@
 {
   "Assmod": "Assist Modules - unlocked T19W40, gives access to an additional mod slot for each of the 4 types",
   "Submod": "Sub-Modules - Values that can be altered within the mod specifically",
+  "AS": "Amplifying Strike cannon mod (also Attack Speed - context based)",
   "ACP": "Anti-cube Portal armor mod",
   "AD": "Astral Deliverance cannon mod",
   "BA": "Being Annihilator cannon mod",
@@ -47,6 +48,7 @@
   "ES": "Energy Shield card",
   "FU": "Free Ups card",
   "HR": "Health Regen card",
+  "IS": "Intro Sprint card",
   "LMS": "Land Mine Stun card",
   "PC": "Plasma Cannon card",
   "RPC": "Recovery Package Chance card",
