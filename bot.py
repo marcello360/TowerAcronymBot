@@ -114,16 +114,16 @@ class TowerAcronymBot:
         
         for acronym in self.acronyms.keys():
             # Create regex pattern requiring spaces (or string boundaries) around the acronym
-            # (?:^|\s|\+) matches start of string, whitespace, or + symbol
-            # (?:\s|[.,!?;:)+]|$) matches whitespace, common punctuation, or end of string
+            # (?:^|\s|[.,!?;:+(\[]) matches start of string, whitespace, or common punctuation
+            # (?:\s|[.,!?;:)+\]]|$) matches whitespace, common punctuation, or end of string
             
             if acronym.upper() in case_sensitive:
                 # Case-sensitive matching for IS and AS
-                pattern = r'(?:^|\s|\+)' + re.escape(acronym) + r'(?:\s|[.,!?;:)+]|$)'
+                pattern = r'(?:^|\s|[.,!?;:+(\[])' + re.escape(acronym) + r'(?:\s|[.,!?;:)+\]]|$)'
                 search_text = text
             else:
                 # Case-insensitive matching for others
-                pattern = r'(?:^|\s|\+)' + re.escape(acronym.upper()) + r'(?:\s|[.,!?;:)+]|$)'
+                pattern = r'(?:^|\s|[.,!?;:+(\[])' + re.escape(acronym.upper()) + r'(?:\s|[.,!?;:)+\]]|$)'
                 search_text = text_upper
             
             if re.search(pattern, search_text):
