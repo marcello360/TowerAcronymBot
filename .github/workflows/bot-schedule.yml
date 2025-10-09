@@ -1,10 +1,6 @@
 name: TowerAcronymBot Scheduler
 
-on:
-  # Run every 10 minutes at specific times
-  schedule:
-    - cron: '7,17,27,37,47,57 * * * *'
-  
+on:  
   # Allow manual trigger
   workflow_dispatch:
 
